@@ -1,0 +1,273 @@
+
+body{
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+}
+.Body {
+    width: 100%;
+    height: 100%;
+}
+html *::-webkit-scrollbar {
+    border-radius: 0;
+    width: 8px;
+  }
+  html *::-webkit-scrollbar {
+    border-radius: 0;
+    width: 8px;
+  }
+  html *::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: rgba(0, 0, 0, .15);
+  }
+  html *::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: rgba(0, 0, 0, .15);
+  }
+  html *::-webkit-scrollbar-track {
+    border-radius: 0;
+    background-color: rgba(0, 0, 0, 0);
+  }
+  html *::-webkit-scrollbar-track {
+    border-radius: 0;
+    background-color: rgba(0, 0, 0, 0);
+  }
+
+.nav_left {
+    width: 4%;
+    height: 100vh;
+    background-color: #ebebed;
+    text-align: center;
+    float: left;
+}
+
+.nav_left div {
+    padding: 20px 0px;
+}
+
+#is_select {
+    background-color: #275975;
+    width: 100%;
+    height: 50px;
+    color: white;
+}
+
+.nav_item {
+    font-size: px;
+}
+.navLeftItem_icon
+{
+    font-size: 25px;
+}
+.nav_item:hover {
+    cursor: pointer;
+    color: white;
+    background-color: #03045E;
+}
+.nav_item_active{
+    color: white;
+    font-size: 30px;
+    background-color: #03045E;
+}
+/* Nội dung bài tập */
+.content {
+    width: 46%;
+    height: 100vh;
+    background-color: white;
+    overflow: auto;
+    overflow-x: hidden;
+    padding: 20px;
+    float: left;
+    color: #242526;
+    box-sizing: border-box;
+}
+.content h1{
+    text-align: center;
+}
+.content div p{
+    font-size: 17px;
+}
+
+.sample_output div, .sample_input div{
+    background-color: #e7ebf0;
+    padding: 5px 10px;
+    white-space: pre-line;
+    font-weight: 500;
+    margin-right: 20px;
+    margin-bottom: 10px;
+}
+
+
+.content h2 {
+    margin-top: 30px;
+    font-size: 19px;
+}
+
+.content p {
+    margin-top: 10px;
+    line-height: 1.6;
+    font-size: 16px;
+}
+
+
+.code_editor {
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+    width: 50%;
+    height: 100vh;
+}
+
+.editor{
+    position: relative;
+    height: 70%;
+}
+
+.option_language {
+    height: 5%;
+    width: 100%;
+    background-color: #24242c;
+}
+
+.selectpicker {
+    float: right;
+    outline: none;
+    position: relative;
+    right: 5px;
+    top:5px;
+}
+
+.result {
+    overflow: auto;
+    overflow-x: hidden;
+    width: 100%;
+    height: 25%;
+    position: absolute;
+    bottom: 0px;
+    background-color: #515151;
+}
+
+.result h3 {
+    margin: 0;
+    font-size: 18px;
+    margin-left: 10px;
+    margin-top: 5px;
+    color: white;
+}
+.navRessult{
+    height: 35px;
+    display: flex;
+}
+
+
+
+.submit_code {
+    position: absolute;
+    right: 20px;
+    bottom: 10px;
+    /* bottom: 20px; */
+    font-size: 15px;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 15px;
+    box-sizing: border-box;
+    float: right;
+    background-color: #26A12B;
+    color: rgb(216, 212, 212);
+}
+
+.submit_code:hover {
+    background-color: #157018;
+    color: rgb(255, 255, 255);
+}
+
+
+
+.result_content {
+    width: auto;
+    min-height: 25%;
+}
+
+.list_testcase {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0;
+    padding: 10px 0px;
+    list-style: none;
+}
+
+.list_testcase li {
+    flex-basis: 33.3%;
+}
+
+.case {
+    height: 30px;
+    margin: 5px 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.case_icon {
+    margin-right: 8px;
+}
+
+.case span {
+    color: white;
+    font-size: 15px;
+}
+
+.icon_success {
+    color: #23A44F;
+}
+
+.icon_error {
+    color: #FF4848;
+}
+
+
+
+.navRessult_item{
+    margin-right: 20px;
+    cursor: pointer;
+    background-color: #515151;
+    color: rgb(222, 222, 222);
+    padding-bottom: 5px;
+}
+.isSelect_navRessult{
+    border-bottom: 3px solid #fbfbfb;
+}
+
+.consoleScreen{
+    width: 100%;
+    min-height: 70%;
+    color: rgb(7, 7, 7);
+    padding: 10px;
+    display: flex;
+}
+
+.consoleContent{
+    width: 50%;
+    font-size: 16px;
+    background-color: #fff;
+    padding: 10px;
+    color: rgb(217, 62, 62);
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+
+.consoleInput{
+    width: 50%;
+    padding-left: 20px;
+    padding-right: 30px;
+    box-sizing: border-box;
+}
+
+.inputEdittext{
+    height: 60px;
+    font-size: 16px;
+    background-color: #ebe7e7;
+    outline: none;
+    border-radius: 10px;
+}
