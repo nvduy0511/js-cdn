@@ -261,6 +261,18 @@ body {
 .icon_error{
     color: #FF4848;
 }
+.icon_loading{
+    animation: spinner 1s linear infinite;
+    color: #fff;
+}
+@keyframes spinner {
+    from{
+        transform: rotate(0);
+    }
+    to{
+        transform: rotate(360deg);
+    }
+}
 
 .consoleScreen{
     width: 100%;

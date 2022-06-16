@@ -18,16 +18,20 @@ axios.interceptors.response.use(function (response) {
 });
 
 export const apis = {
-    getQuestion: () =>{
-        const url = `/Exercise/getExercise?id=1`
-        return axiosClient.get(url);
+    getQuestion: (id) =>{
+        const url = `/Exercise/getExercise?id=${id}`
+        return axiosClient.get(url,{id});
     },
-    getTestCase: () =>{
-        const url = `/Exercise/getTestCase?id=1`
-        return axiosClient.get(url);
+    getTestCase: (id) =>{
+        const url = `/Exercise/getTestCase?id=${id}`
+        return axiosClient.get(url,{id});
     },
     runCode: (runCodeRequest) =>{
         const url = '/Exercise/runCode';
         return axiosClient.post(url,runCodeRequest);
+    },
+    runCodes: (runCodeRequest,id) => {
+        const url = `/Exercise/runCodes?id=${id}`;
+        return axiosClient.post(url,runCodeRequest,{id});
     }
 }

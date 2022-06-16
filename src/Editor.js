@@ -42,9 +42,9 @@ function Editor() {
     const editor = useRef();
 
     const getData = async () => {
-        const resQuestion = await apis.getQuestion();
+        const resQuestion = await apis.getQuestion(params.id);
         setQuestion(resQuestion.data);
-        const resTestCase = await apis.getTestCase();
+        const resTestCase = await apis.getTestCase(params.id);
         setTestCases(resTestCase.data);
     }
 
@@ -57,21 +57,20 @@ function Editor() {
     }
     
     function handleClickRunCode() {
-        setResultCode("Đang chạy....")
-        console.log(editor.current.editor.getValue())
-        // const data = async () => {
-        //     try {
-        //         const response = await apis.runCode({
-        //             code: editor.current.editor.getValue(),
-        //             input: input,
-        //             language: language
-        //         });
-        //         setResultCode(response.data);
-        //     } catch (error) {
-        //         console.log("Fetch data error: ", error);
-        //     }
-        // }
-        // data();
+        setResultCode("Đang chạy....");
+        const data = async () => {
+            try {
+                const response = await apis.runCode({
+                    code: editor.current.editor.getValue(),
+                    input: input,
+                    language: language
+                });
+                setResultCode(response.data);
+            } catch (error) {
+                console.log("Fetch data error: ", error);
+            }
+        }
+        data();
     }
 
     const MouseDownResize = (e) =>
@@ -87,21 +86,22 @@ function Editor() {
     }
 
     const handleClickSubmitCode = () => {
-        // const submit = async () => {
-        //     setTestCases(testCases.map(() => 3))
-        //     try {
-        //         const response = await RunCodeAPI.postRunCodes({
-        //             code: editor.current.editor.getValue(),
-        //             input: input,
-        //             language: language
-        //         }, params.id);
-        //         setTestCases(response.data)
-        //     } catch (error) {
-        //         console.log("Fetch data error: ", error);
-        //     }
-        // }
-        // submit();
+        const submit = async () => {
+            setTestCases(testCases.map(() => 3))
+            try {
+                const response = await apis.runCodes({
+                    code: editor.current.editor.getValue(),
+                    input: '',
+                    language: language
+                }, params.id);
+                setTestCases(response.data)
+            } catch (error) {
+                console.log("Fetch data error: ", error);
+            }
+        }
+        submit();
     }
+
     return (
         <div className={cx("content_body")}>
             <div className={cx("nav_left")}>
@@ -200,7 +200,8 @@ function Editor() {
                         />
                         </div>
                     </div>
-                    <Button sx={{position:"absolute", right:"20px", bottom:"10px"}} color="success" variant="contained" size="medium">
+                    <Button sx={{position:"absolute", right:"20px", bottom:"10px"}} color="success" variant="contained" size="medium"
+                        onClick={handleClickSubmitCode}>
                         Nộp bài
                     </Button>
                     <div className={cx('btn-extend')} onClick={() => setIsExtend((p) => !p)}>
@@ -229,7 +230,8 @@ function Editor() {
                                                         <FontAwesomeIcon
                                                             className={clsx(styles.icon,{
                                                                 [styles.icon_success]: testCase === 1 || testCase === 2,
-                                                                [styles.icon_error]: testCase === 0
+                                                                [styles.icon_error]: testCase === 0,
+                                                                [styles.icon_loading]: testCase === 3
                                                             })}
                                                             icon={testCase === 2
                                                                 ? faCircle : (testCase === 1

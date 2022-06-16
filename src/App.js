@@ -7,8 +7,11 @@ import {
   } from "react-router-dom";
 function App() {
     return (
-        <Editor/>
-
+        <BrowserRouter>
+            <Routes>
+                <Route path="/Exercise/Detail/:id" element={<Editor />} />
+            </Routes>
+        </BrowserRouter>
     );
 }
 export default App;
