@@ -1,11 +1,11 @@
 ﻿import React, { useState, useRef, useEffect } from 'react';
-import styles from './ExerciseDetail.module.css';
+import styles from './css/Editor.module.css';
 import clsx from 'clsx';
 import AceEditor from "react-ace";
 import TextareaAutosize from '@mui/material/TextareaAutosize';
 import { defaultValueEditor, modeEditor, navLeftItems } from './dataCodeUI';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircleCheck, faCircleXmark, faCircle, faArrowsLeftRight, faChevronDown, faChevronUp, faSpinner } from '@fortawesome/free-solid-svg-icons';
+import { faCircleCheck, faCircleXmark, faCircle, faArrowsLeftRight, faChevronDown, faChevronUp, faSpinner, faBars } from '@fortawesome/free-solid-svg-icons';
 import { useParams } from 'react-router-dom';
 import { faAlignLeft, faRankingStar, faClock } from '@fortawesome/free-solid-svg-icons';
 import Button from '@mui/material/Button';
@@ -19,6 +19,9 @@ import "ace-builds/src-noconflict/mode-csharp";
 import "ace-builds/src-noconflict/theme-one_dark";
 import {apis} from './api'
 import classNames from 'classnames/bind'
+import Rank from './Rank'
+import History from './History'
+import Exercise from './Exercise';
 const cx = classNames.bind(styles);
 
 
@@ -29,7 +32,7 @@ function Editor() {
     const [resulCode, setResultCode] = useState('Console ...')
     const [input, setInput] = useState("")
     // navigate
-    const [tabType, setTabType] = useState("content")
+    const [tabType, setTabType] = useState("exercise")
     const [isTestCase, setIsTestCase] = useState(true)
     const [language, setLanguage] = useState("c")
     const [testCases, setTestCases] = useState([])
@@ -54,6 +57,7 @@ function Editor() {
 
     const handleNavLeft = (value) => {
         setTabType(value);
+        console.log(value)
     }
     
     function handleClickRunCode() {
@@ -105,57 +109,50 @@ function Editor() {
     return (
         <div className={cx("content_body")}>
             <div className={cx("nav_left")}>
-                <div className={cx("is_select","nav_item")}>
+    
+                <div className={clsx(styles.nav_item,{[styles.is_select]:tabType === 'exercise'})} onClick={() => handleNavLeft('exercise')}>
                     <FontAwesomeIcon icon={faAlignLeft} className={cx("icon-navBar")} />
                 </div>
-                <div className={cx("nav_item ")} >
+                <div className={clsx(styles.nav_item,{[styles.is_select]:tabType === 'rank'})} onClick={() => handleNavLeft('rank')} >
                     <FontAwesomeIcon icon={faRankingStar} className={cx("icon-navBar")}  />
                 </div>
-                <div className={cx("nav_item ")}>
+                <div className={clsx(styles.nav_item,{[styles.is_select]:tabType === 'history'})} onClick={() => handleNavLeft('history')}>
                     <FontAwesomeIcon icon={faClock}  className={cx("icon-navBar")} />
                 </div>
      
             </div>
+            <label htmlFor="nav_mobile-input" className={cx("icon_Bars")}> 
+                <FontAwesomeIcon icon={faBars} />
+            </label>
+            
+            <input type={'checkbox'} hidden className={cx("nav_mobile-input")} id="nav_mobile-input"></input>
+            <label htmlFor="nav_mobile-input" className={cx("overlay")}/>
+
+            <div className={cx("nav_mobile")}>
+                <div className={cx("nav_mobile-user")}>
+                    <img src='https://static.fullstack.edu.vn/static/media/fallback-avatar.155cdb2376c5d99ea151.jpg'/>
+                    <h6 style={{margin:'12px 0 0',fontSize: '18px'}}>nvduy-0511</h6>
+                </div>
+                <ul className={cx("nav_mobile-list" )}>
+                    <label htmlFor="nav_mobile-input" className={clsx(cx("nav_mobile-item"),{[cx("is-select-itemMobile")]:tabType === 'exercise'})} onClick={() => handleNavLeft('exercise')}>
+                        <FontAwesomeIcon icon={faAlignLeft} className={cx("icon-navmobile")} />
+                        <p>Đề bài</p>
+                    </label>
+                    <label htmlFor="nav_mobile-input" className={clsx(cx("nav_mobile-item"),{[cx("is-select-itemMobile")]:tabType === 'rank'})} onClick={() => handleNavLeft('rank')}>
+                        <FontAwesomeIcon icon={faRankingStar} className={cx("icon-navmobile")} />
+                        <p>Bảng xếp hạng</p>
+                    </label>
+                    <label htmlFor="nav_mobile-input" className={clsx(cx("nav_mobile-item"),{[cx("is-select-itemMobile")]:tabType === 'history'})} onClick={() => handleNavLeft('history')}>
+                        <FontAwesomeIcon icon={faClock} className={cx("icon-navmobile")} />
+                        <p>Lịch sử làm bài</p>
+                    </label>
+                </ul>
+            </div>
         
             <div id='content-question' className={cx("content")}>
-                <div>
-                    <h1 className={cx('content-question_title')}>{question.title}</h1>
-                </div>
-                <div className={cx("question")}>
-                    <p>
-                        {question.content}
-                    </p>
-                </div>
-    
-                <div>
-                    <h2>Input Format</h2>
-                    <p>{question.inputFomat}</p>
-                </div>
-    
-                <div>
-                    <h2>Contraints</h2>
-                    <p>{question.constraint}</p>
-                </div>
-    
-                <div>
-                    <h2>Output Format</h2>
-                    <p>{question.outputFormat}</p>
-                </div>
-    
-                <div>
-                    <h2>Sample Input</h2>
-                    <div className={cx("sample_input")}>
-                        {question.sampleInput}
-                    </div>
-                </div>
-    
-                <div>
-                    <h2>Sample Ouput</h2>
-                    <div className={cx("sample_output")}>
-                        {question.sampleOutput}
-                    </div>
-                </div>
-                
+                {tabType === 'exercise' && <Exercise question={question}/>}
+                {tabType === 'rank' && <Rank/>}
+                {tabType === 'history' && <History/>}
             </div>
             
             <div className={cx("code_editor")}>
