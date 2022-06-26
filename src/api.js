@@ -33,5 +33,17 @@ export const apis = {
     runCodes: (runCodeRequest,id) => {
         const url = `/Exercise/runCodes?id=${id}`;
         return axiosClient.post(url,runCodeRequest,{id});
+    },
+    submitCode: (runCodeRequest,id) => {
+        const url = `/Exercise/submitCode?id=${id}`;
+        return axiosClient.post(url,runCodeRequest,{id});
+    },
+    getHistory:(id) =>{
+        const url = `/Exercise/getHistory?id=${id}`;
+        return axiosClient.post(url,{id});
+    }, 
+    getRank:(id) => {
+        const url = `/Exercise/getRank?id=${id}`;
+        return axiosClient.post(url,{id});
     }
 }

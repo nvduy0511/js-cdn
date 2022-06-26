@@ -7,12 +7,12 @@ import {
   } from "react-router-dom";
 function App() {
     return (
-        // <BrowserRouter>
-        //     <Routes>
-            // <Route path="/Exercise/Detail/:id" element={<Editor />} />
-        //     </Routes>
-        // </BrowserRouter>
-        <Editor/>
+        <BrowserRouter>
+            <Routes>
+            <Route path="/Exercise/Detail/:id" element={<Editor />} />
+            </Routes>
+        </BrowserRouter>
+        // <Editor/>
     );
 }
 export default App;

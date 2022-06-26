@@ -89,11 +89,28 @@ function Editor() {
         resizable.style.width = `${parseInt(initialSize) + parseInt(e.clientX - initialPos)}px`;
     }
 
-    const handleClickSubmitCode = () => {
+    const handleClickRunCodes = () => {
         const submit = async () => {
             setTestCases(testCases.map(() => 3))
             try {
                 const response = await apis.runCodes({
+                    code: editor.current.editor.getValue(),
+                    input: '',
+                    language: language
+                }, params.id);
+                setTestCases(response.data)
+            } catch (error) {
+                console.log("Fetch data error: ", error);
+            }
+        }
+        submit();
+    }
+
+    const handleClickSubmitCode = () => {
+        const submit = async () => {
+            setTestCases(testCases.map(() => 3))
+            try {
+                const response = await apis.submitCode({
                     code: editor.current.editor.getValue(),
                     input: '',
                     language: language
@@ -151,8 +168,8 @@ function Editor() {
         
             <div id='content-question' className={cx("content")}>
                 {tabType === 'exercise' && <Exercise question={question}/>}
-                {tabType === 'rank' && <Rank/>}
-                {tabType === 'history' && <History/>}
+                {tabType === 'rank' && <Rank id={params.id}/>}
+                {tabType === 'history' && <History id={params.id}/>}
             </div>
             
             <div className={cx("code_editor")}>
@@ -197,7 +214,12 @@ function Editor() {
                         />
                         </div>
                     </div>
-                    <Button sx={{position:"absolute", right:"20px", bottom:"10px"}} color="success" variant="contained" size="medium"
+
+                    <Button sx={{position:"absolute", right:"100px", bottom:"10px"}}  variant="contained" size="small"
+                        onClick={handleClickRunCodes}>
+                        Chạy thử
+                    </Button>
+                    <Button sx={{position:"absolute", right:"20px", bottom:"10px"}} color="success" variant="contained" size="small"
                         onClick={handleClickSubmitCode}>
                         Nộp bài
                     </Button>
